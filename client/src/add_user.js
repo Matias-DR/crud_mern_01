@@ -1,4 +1,5 @@
 import {useState} from 'react';
+import uniqid from 'uniqid';
 
 function AddUser() {
 
@@ -7,7 +8,14 @@ function AddUser() {
     const[email, setEmail] = useState('')
     const[tel, setTel] = useState('')
 
-    function add_user() {}
+    function add_user() {
+        var user = {
+            name: name,
+            email: email,
+            tel: tel,
+            id: uniqid()
+        }
+    }
 
     return (
         <div class="container text-center">
