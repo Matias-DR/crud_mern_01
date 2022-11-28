@@ -1,3 +1,5 @@
+// Se definen esquema, modelo y ruta de acceso a la base de datos para el usuario
+
 const express = require('express');
 const router = express.Router();
 
@@ -11,3 +13,8 @@ const userSchema = new mongoose.Schema({
 })
 
 const userModel = mongoose.model('user', userSchema)
+module.exports = router
+
+router.get('/test', (req, res)  => {
+    res.end('Funcionando')
+})
