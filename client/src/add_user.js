@@ -17,7 +17,7 @@ function AddUser() {
             id: uniqid()
         }
         // res.then funciona como un try except, captura la excepción levantada
-        axios.post('/api/user/add_user', user).then(
+        axios.post('api/user/add_user', user).then(
             res => {alert(res.data)}).then(err => {
                 console.log(err)
             })
