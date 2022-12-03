@@ -1,5 +1,6 @@
 import {useState} from 'react';
 import uniqid from 'uniqid';
+import axios from 'axios';
 
 function AddUser() {
 
@@ -15,6 +16,11 @@ function AddUser() {
             tel: tel,
             id: uniqid()
         }
+        // Doble then funciona como un try except, captura la excepción levantada
+        axios.post('/api/user/add_user', user).then(
+            res => {alert(res.data)}).then(err => {
+                console.log(err)
+            })
     }
 
     return (

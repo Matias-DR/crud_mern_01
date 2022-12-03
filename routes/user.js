@@ -12,9 +12,15 @@ const userSchema = new mongoose.Schema({
     phone: String
 })
 
-const userModel = mongoose.model('user', userSchema)
+const user_model = mongoose.model('user', userSchema)
 module.exports = router
 
-router.get('/test', (req, res)  => {
-    res.end('Funcionando')
+// La ruta para llegar hasta acá es '/api/user/', por lo que cualquier enlace en cual fuera la petición http, llegará desde '/api/user/<enlace_de_petición>'
+router.post('/add_user', (req, res)  => {
+    const new_user = new user_model({
+        id: req.body.id,
+        name: req.body.name,
+        mail: req.body.email,
+        phone: req.body.phone
+    })
 })
