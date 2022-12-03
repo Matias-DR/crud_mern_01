@@ -29,3 +29,10 @@ router.post('/add_user', (req, res)  => {
         else res.send('Usuario añadido')
     })
 })
+
+router.get('/get_users', (req, res) => {
+    user_model.find({}, (err, docs) => {
+        if (err) res.send('Error al cargar los usuarios, por favor reintente')
+        else res.send(docs)
+    })
+})
