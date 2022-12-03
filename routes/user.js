@@ -8,7 +8,7 @@ const mongoose = require('mongoose');
 const userSchema = new mongoose.Schema({
     id: String,
     name: String,
-    mail: String,
+    email: String,
     phone: String
 })
 
@@ -20,7 +20,12 @@ router.post('/add_user', (req, res)  => {
     const new_user = new user_model({
         id: req.body.id,
         name: req.body.name,
-        mail: req.body.email,
+        email: req.body.email,
         phone: req.body.phone
+    })
+    // Definición de qué hacer con la inforomación
+    new_user.save((err) => {
+        if (err) res.send('No se pudo agregar, por favor reintente')
+        else res.send('Usuario añadido')
     })
 })

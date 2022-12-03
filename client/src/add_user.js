@@ -16,7 +16,7 @@ function AddUser() {
             tel: tel,
             id: uniqid()
         }
-        // Doble then funciona como un try except, captura la excepción levantada
+        // res.then funciona como un try except, captura la excepción levantada
         axios.post('/api/user/add_user', user).then(
             res => {alert(res.data)}).then(err => {
                 console.log(err)
@@ -24,12 +24,12 @@ function AddUser() {
     }
 
     return (
-        <div class="container text-center">
-            <div class="row">
+        <div className="container text-center">
+            <div className="row">
                 <h2 className="mt-4">Agregar usuarios</h2>
             </div>
-            <div class="row">
-                <div class="col-sm-6 offset-3 border border-warning">
+            <div className="row">
+                <div className="col-sm-6 offset-3 border border-warning">
                     <div className="mt-1">
                         <label htmlFor="name" className="form-label">Nombre</label>
                         <input type="text" className="form-control" value={name} onChange={(e) => {setName(e.target.value)}}></input>
@@ -42,7 +42,7 @@ function AddUser() {
                         <label htmlFor="phone" className="form-label">Teléfono</label>
                         <input type="tel" className="form-control" value={tel} onChange={(e) => {setTel(e.target.value)}}></input>
                     </div>
-                    <button onClick="" className="mt-3 mb-3 btn btn-success">Guardar usuario</button>
+                    <button onClick={add_user} className="mt-3 mb-3 btn btn-success">Guardar usuario</button>
                 </div>
             </div>
         </div>
