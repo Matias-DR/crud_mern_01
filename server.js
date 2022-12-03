@@ -24,5 +24,5 @@ const bp = require('body-parser');
 // La dirección 'api' es convencional en tanto al ingreso desde un cliente mediante el servidor hacia la base de datos
 app.use('/api/user', user_route)
 
-app.use(bp.json)
+app.use(bp.json())
 app.use(bp.urlencoded({extended: true}))
