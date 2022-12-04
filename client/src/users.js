@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 import User from './user'
 
 function Users() {
@@ -9,15 +9,16 @@ function Users() {
         axios.get('api/user/get_users').then(res => {
             set_users_data(res.data)
         }).catch(
-            err => { console.log('Petición fallida', err)
-        })
+            err => {
+                console.log('Petición fallida', err)
+            })
     }, [])
 
     const users_list = users_data.map(user => {
         return (
             // Es importante definir la pk del elemento cuando se lo define dentro de una lista de elementos. No se genera automáticamente una pk para cada elemento dentro de la lista de elementos
             <div key={user.id}>
-                <User data={user}/>
+                <User data={user} />
             </div>
         )
     })

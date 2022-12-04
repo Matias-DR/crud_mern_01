@@ -29,7 +29,7 @@ function App() {
                                 <ul className="dropdown-menu">
                                     <li><a className="dropdown-item" href="/user_edit">Edit user</a></li>
                                     <li><a className="dropdown-item" href="#">Another action</a></li>
-                                    <li><hr className="dropdown-divider"/></li>
+                                    <li><hr className="dropdown-divider" /></li>
                                     <li><a className="dropdown-item" href="#">Something else here</a></li>
                                 </ul>
                             </li>
@@ -38,8 +38,8 @@ function App() {
                             </li>
                         </ul>
                         <form className="d-flex" role="search">
-                            <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-                                <button className="btn btn-outline-success" type="submit">Search</button>
+                            <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+                            <button className="btn btn-outline-success" type="submit">Search</button>
                         </form>
                     </div>
                 </div>
@@ -48,7 +48,7 @@ function App() {
                 <Routes>
                     <Route path='/' element={<Users />}></Route>
                     <Route path='/add_user' element={<AddUser />}></Route>
-                    <Route path='/user_edit' element={<UserEdit />}></Route>
+                    <Route path='/user_edit/:id' element={<UserEdit />}></Route>
                 </Routes>
             </BrowserRouter>
         </div>
