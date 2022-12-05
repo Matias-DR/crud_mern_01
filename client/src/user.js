@@ -1,14 +1,25 @@
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import AOS from 'aos';
+import 'aos/dist/aos.css'
+import Swal from 'sweetalert2';
 
 function User({ data }) {
+
+    useEffect(() => {
+        AOS.init()
+    }, [])
+
     function del_user() {
         axios.post('api/user/del_user', { id: data.id }).then(
-            res => { alert(res.data) }).catch(err => { alert(err) })
+            res => {
+                Swal.fire(res.data)
+            }).catch(err => { alert(err) })
     }
 
     return (
-        <div className="container text-center mt-3 mb-3 ">
+        <div className="container text-center mt-3 mb-3" data-aos="zoom-in">
             <div className="row">
                 <div className="col">
                     {data.name}
