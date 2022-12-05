@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router'
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2';
 
 function UserEdit() {
     const params = useParams()
+    const nav = useNavigate()
     // Hooks - Data binding
     const [name, set_name] = useState([])
     const [email, set_email] = useState([])
@@ -31,7 +34,10 @@ function UserEdit() {
             id: params.id
         }
         axios.post('/api/user/edit_user', user).then(
-            res => { alert(res.data) }).then(err => {
+            res => {
+                Swal.fire(res.data)
+                nav('/')
+            }).then(err => {
                 if (err) console.log(err)
             })
     }
