@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import uniqid from 'uniqid';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 function AddUser() {
     // Hooks - Data binding
@@ -17,7 +18,9 @@ function AddUser() {
         }
         // res.then funciona como un try except, captura la excepción levantada
         axios.post('api/user/add_user', user).then(
-            res => { alert(res.data) }).then(err => {
+            res => {
+                Swal.fire(res.data)
+            }).then(err => {
                 console.log(err)
             })
     }
