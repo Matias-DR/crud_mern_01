@@ -2,8 +2,10 @@ import { useState } from 'react';
 import uniqid from 'uniqid';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { useNavigate } from "react-router-dom";
 
 function AddUser() {
+    const nav = useNavigate()
     // Hooks - Data binding
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
@@ -20,6 +22,7 @@ function AddUser() {
         axios.post('api/user/add_user', user).then(
             res => {
                 Swal.fire(res.data)
+                nav('/')
             }).then(err => {
                 console.log(err)
             })
