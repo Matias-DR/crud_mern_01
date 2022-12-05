@@ -12,7 +12,9 @@ function Users() {
             err => {
                 console.log('Petición fallida', err)
             })
-    }, [])
+    },
+    // Sobre esta lista, lista de dependencias, se indican las variables para las que se ejecutará el mismo método 'useEffect' cuando cambien de estado, por ejemplo, se elimina un usuario de la lista 'users_data', funcinoa como si se tratase de enlistarse en la variable como observador
+    [users_data])
 
     const users_list = users_data.map(user => {
         return (
