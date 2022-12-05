@@ -46,6 +46,7 @@ router.post('/get_user', (req, res) => {
     })
 })
 
+// En el caso de definir 'get' para pedir un usuario en vez de 'post', a la hora de tomar el id que se haya pasado, debe tomarse desde 'req.body', ya que la misma será pasada por parámetros mediante la url, y no como cuerpo en el caso de este método
 router.post('/edit_user', (req, res) => {
     user_model.findOneAndUpdate(
         { 'id': req.body.id }, {
@@ -55,5 +56,12 @@ router.post('/edit_user', (req, res) => {
     }, err => {
         if (err) res.send('Error al editar el usuario, por favor reintente')
         else res.send('Usuario editado')
+    })
+})
+
+router.post('/del_user', (req, res) => {
+    user_model.findOneAndDelete({ id: req.body.id }, err => {
+        if (err) res.send('Error al eliminar el usuario, por favor reintente')
+        else res.send(`Usuario eliminado`)
     })
 })
