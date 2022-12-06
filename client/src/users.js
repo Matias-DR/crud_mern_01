@@ -53,11 +53,11 @@ function Users() {
     })
 
     return (
-        <div>
-            <h1>
-                Lista de usuarios
-            </h1>
-            <div className="container text-center">
+        <div className="container text-center">
+            <div className="row row-cols-1">
+                <h1 className="col">Lista de usuarios</h1>
+            </div>
+            <div class="row row-cols-1 row-cols-md-4 g-4">
                 {users_list}
             </div>
         </div>

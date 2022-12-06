@@ -19,27 +19,47 @@ function User({ data }) {
     }
 
     return (
-        <div className="container text-center mt-3 mb-3" data-aos="zoom-in">
-            <div className="row">
-                <div className="col">
-                    {data.name}
+        <div className="col">
+            <div className="card h-100" data-aos="zoom-in">
+                <img src="https://img1.ak.crunchyroll.com/i/spire2/b2dbf1718b6896bf98968bba9069f4ec1660713594_full.png" className="card-img-top" alt="..."></img>
+                <div className="card-body">
+                    <h5 className="card-title">{data.name}</h5>
+                    <p className="card-text">{data.email}</p>
+                    <p className="card-text">{data.phone}</p>
                 </div>
-                <div className="col">
-                    {data.email}
-                </div>
-                <div className="col">
-                    {data.phone}
-                </div>
-                <div className="col">
-                    <Link to={`/user_edit/${data.id}`}>
-                        <button type="button" className="btn btn-sm btn-warning">Editar</button>
-                    </Link>
-                </div>
-                <div className="col">
-                    <button type="button" className="btn btn-sm btn-outline-danger" onClick={del_user}>Eliminar</button>
+                <div class="row align-items-center">
+                    <div class="col">
+                        <Link to={`/user_edit/${data.id}`}>
+                            <button type="button" className="btn btn-sm btn-warning mb-2">Editar</button>
+                        </Link>
+                        <button type="button" className="btn btn-sm btn-outline-danger ms-2 mb-2" onClick={del_user}>Eliminar</button>
+                    </div>
                 </div>
             </div>
         </div>
+        /*
+            <div className="container text-center mt-3 mb-3" data-aos="zoom-in">
+                <div className="row">
+                    <div className="col">
+                        {data.name}
+                    </div>
+                    <div className="col">
+                        {data.email}
+                    </div>
+                    <div className="col">
+                        {data.phone}
+                    </div>
+                    <div className="col">
+                        <Link to={`/user_edit/${data.id}`}>
+                            <button type="button" className="btn btn-sm btn-warning">Editar</button>
+                        </Link>
+                    </div>
+                    <div className="col">
+                        <button type="button" className="btn btn-sm btn-outline-danger" onClick={del_user}>Eliminar</button>
+                    </div>
+                </div>
+            </div>
+            */
     )
 }
 
