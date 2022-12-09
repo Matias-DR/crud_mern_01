@@ -33,12 +33,11 @@ function Users() {
             error => console.log(error.message)
         );
         */
-        axios.get('api/user/get_users').then(res => {
-            set_users_data(res.data)
+       axios.get('api/user/get_users').then(res => {
+           set_users_data(res.data)
         }).catch(
-            err => {
-                console.log('Petición fallida', err)
-            })
+            err => console.log('Petición fallida', err)
+        )
     },
         // Sobre esta lista, lista de dependencias, se indican las variables para las que se ejecutará el mismo método 'useEffect' cuando cambien de estado, por ejemplo, se elimina un usuario de la lista 'users', funcinoa como si se tratase de enlistarse en la variable como observador
         [users])
@@ -57,7 +56,7 @@ function Users() {
             <div className="row row-cols-1">
                 <h1 className="col">Lista de usuarios</h1>
             </div>
-            <div class="row row-cols-1 row-cols-md-4 g-4">
+            <div className="row row-cols-1 row-cols-md-4 g-4">
                 {users_list}
             </div>
         </div>

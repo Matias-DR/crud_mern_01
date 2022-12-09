@@ -3,6 +3,7 @@ import { useParams } from 'react-router'
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
+import { FileUploader } from "react-drag-drop-files";
 
 function UserEdit() {
     const params = useParams()
@@ -11,6 +12,7 @@ function UserEdit() {
     const [name, set_name] = useState([])
     const [email, set_email] = useState([])
     const [phone, set_phone] = useState([])
+    const [prof_img, set_prof_img] = useState('')
 
     useEffect(() => {
         // En este caso, se indica como segundo parámetro el criterio por el que realizar la búsqueda del usuario.
@@ -20,17 +22,20 @@ function UserEdit() {
             set_name(res.data.name)
             set_email(res.data.email)
             set_phone(res.data.phone)
+            set_prof_img(res.data.prof_img)
         }).catch(
             err => {
                 console.log('Petición fallida', err)
             })
-    }, [params.id])
+    }, [params.id]
+    )
 
     function edit_user() {
         var user = {
             name: name,
             email: email,
             phone: phone,
+            prof_img: prof_img,
             id: params.id
         }
         axios.post('/api/user/edit_user', user).then(
@@ -48,7 +53,8 @@ function UserEdit() {
                 <h2 className="mt-4">Editar usuario</h2>
             </div>
             <div className="row">
-                <div className="col-sm-6 offset-3 border border-warning">
+                {/* <div className="col-sm-6 offset-3 border border-warning"> */}
+                <div className="col border border-warning">
                     <div className="mt-1">
                         <label htmlFor="name" className="form-label">Nombre</label>
                         <input type="text" className="form-control" value={name} onChange={(e) => { set_name(e.target.value) }}></input>
@@ -62,6 +68,20 @@ function UserEdit() {
                         <input type="tel" className="form-control" value={phone} onChange={(e) => { set_phone(e.target.value) }}></input>
                     </div>
                     <button onClick={edit_user} className="mt-3 mb-3 btn btn-success">Actualizar usuario</button>
+                </div>
+                <div className="col">
+                    <div className="container text-center">
+                        <div className="row">
+                            <div className="col">
+                                <img src={prof_img} alt="..."></img>
+                            </div>
+                            <div className="row">
+                                <div className="col">
+                                    <FileUploader handleChange={(image) => { set_prof_img(URL.createObjectURL(image)) }} name="image" types={['png']} label="Suba una imagen clickeando aquí o arrastrela" hoverTitle="Arrastre hasta aquí" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
