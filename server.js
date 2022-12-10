@@ -16,7 +16,7 @@ const db = require('./conection')
 // Si se utiliza1 body parser, debe importarse en el servidor
 const bp = require('body-parser');
 app.use(bp.urlencoded({ extended: true }))
-app.use(bp.json())
+app.use(bp.json({ limit: 5242880 }))
 
 // Traemos las rutas y los modelos de tablas
 // Mediante estas rutas se accede a la db

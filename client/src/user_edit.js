@@ -3,7 +3,7 @@ import { useParams } from 'react-router'
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
-import { FileUploader } from "react-drag-drop-files";
+import Avatar from 'react-avatar-edit'
 
 function UserEdit() {
     const params = useParams()
@@ -27,8 +27,7 @@ function UserEdit() {
             err => {
                 console.log('Petición fallida', err)
             })
-    }, [params.id]
-    )
+    }, [params.id])
 
     function edit_user() {
         var user = {
@@ -45,6 +44,14 @@ function UserEdit() {
             }).then(err => {
                 if (err) console.log(err)
             })
+    }
+
+    function onCrop(image) {
+        set_prof_img(image)
+    }
+
+    function onClose() {
+        set_prof_img(null)
     }
 
     return (
@@ -70,21 +77,13 @@ function UserEdit() {
                     <button onClick={edit_user} className="mt-3 mb-3 btn btn-success">Actualizar usuario</button>
                 </div>
                 <div className="col">
-                    <div className="container text-center">
-                        <div className="row">
-                            <div className="col">
-                                <img src={prof_img} alt="..."></img>
-                            </div>
-                            <div className="row">
-                                <div className="col">
-                                    <FileUploader handleChange={(image) => { set_prof_img(URL.createObjectURL(image)) }} name="image" types={['png']} label="Suba una imagen clickeando aquí o arrastrela" hoverTitle="Arrastre hasta aquí" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <Avatar onCrop={onCrop} onClose={onClose} width={320} height={320} imageWidth={320}></Avatar>
+                </div>
+                <div className="col">
+                    <img src={prof_img} alt="..."></img>
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
 

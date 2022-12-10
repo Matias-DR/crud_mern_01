@@ -33,8 +33,8 @@ function Users() {
             error => console.log(error.message)
         );
         */
-       axios.get('api/user/get_users').then(res => {
-           set_users_data(res.data)
+        axios.get('api/user/get_users').then(res => {
+            set_users_data(res.data)
         }).catch(
             err => console.log('Petición fallida', err)
         )
