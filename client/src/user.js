@@ -5,7 +5,7 @@ import AOS from 'aos';
 import 'aos/dist/aos.css'
 import Swal from 'sweetalert2';
 
-function User({ data }) {
+function User({ data, userDeleted }) {
 
     useEffect(() => {
         AOS.init()
@@ -15,6 +15,7 @@ function User({ data }) {
         axios.post('api/user/del_user', { id: data.id }).then(
             res => {
                 Swal.fire(res.data)
+                userDeleted(true)
             }).catch(err => { alert(err) })
     }
 
