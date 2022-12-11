@@ -1,11 +1,20 @@
+import { useState, useEffect } from 'react';
 import './App.css';
 import AddUser from './add_user'
 import UserEdit from './user_edit'
 import Users from './users'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
+// Quedamos en que hay que realizar la primer consulta al cargar la página, y, realizar la consulta al eliminar un usuario
 
 function App() {
+    const [user_search_input, set_user_search_input] = useState('')
+
+    useEffect(() => {
+        console.log(user_search_input.type ? true : false)
+        if (!user_search_input.type) set_user_search_input('')
+    }, [user_search_input])
+
     return (
         <div className="App">
             <nav className="navbar navbar-expand-lg bg-light">
@@ -21,15 +30,18 @@ function App() {
                             </li>
                         </ul>
                         <form className="d-flex" role="search">
-                            <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+                            <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" onChange={input => set_user_search_input(input)}/>
                             <button className="btn btn-outline-success" type="submit">Search</button>
                         </form>
                     </div>
                 </div>
             </nav>
+
+            {/* Quedamos en enviar la entrada obtenida del cuadro de búsqueda al componente 'Users' para que realice la consulta según el contenido */}
+
             <BrowserRouter>
                 <Routes>
-                    <Route path='/' element={<Users />}></Route>
+                    <Route path='/' element={<Users input={user_search_input}/>}></Route>
                     <Route path='/add_user' element={<AddUser />}></Route>
                     <Route path='/user_edit/:id' element={<UserEdit />}></Route>
                 </Routes>
