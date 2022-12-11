@@ -16,7 +16,7 @@ const userSchema = new mongoose.Schema({
 const user_model = mongoose.model('user', userSchema)
 module.exports = router
 
-const user_def_prof_pic = "data:image/png;base64,"+fs.readFileSync('./routes/user_def_prof_pic')
+const user_def_prof_pic = "data:image/png;base64," + fs.readFileSync('./routes/user_def_prof_pic')
 
 // La ruta para llegar hasta acá es '/api/user/', por lo que cualquier enlace en cual fuera la petición http, llegará desde '/api/user/<enlace_de_petición>'
 router.post('/add_user', (req, res) => {
@@ -43,13 +43,20 @@ router.get('/get_users', (req, res) => {
     })
 })
 
+router.post('/custom_get_users', (req, res) => {
+    user_model.find({ name: { $regex: req.body.input } }, (err, users) => {
+        if (err) res.send('Error al cargar los usuarios, por favor reintente')
+        else {
+            console.log(users)
+            res.send(users)
+        }
+    })
+})
+
 router.post('/get_user', (req, res) => {
     user_model.findOne({ id: req.body.id }, (err, user) => {
         if (err) res.send('Error al cargar los usuarios, por favor reintente')
-        else {
-            user.prof_img
-            res.send(user)
-        }
+        else res.send(user)
     })
 })
 
