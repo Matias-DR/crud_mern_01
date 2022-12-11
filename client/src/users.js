@@ -1,11 +1,11 @@
 import axios from 'axios';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import User from './user'
 
 function Users(props) {
-    const inputRef = useRef(null);
-    const usersRef = useRef(null);
+    const [aux_input, set_aux_input] = useState('');
     const [users, set_users_data] = useState([])
+    const [userDeleted, set_user_deleted] = useState(false)
 
     useEffect(() => {
         /*
@@ -17,7 +17,6 @@ function Users(props) {
         ).catch(
             error => console.log(error.message)
         );
-
         // Podrían realizarse otras peticiones configurando la función 'fetch' con el parámetro 'options' de la siguiente manera. Aclaración del lado del backend debería esperarse una función 'post('get_users')':
         fetch(
             'http://localhost:3000/api/user/get_users',
@@ -35,25 +34,23 @@ function Users(props) {
             error => console.log(error.message)
         );
         */
-        if ((props.input && inputRef.current !== props.input) | !users) {
-            axios.post('api/user/custom_get_users', { input: props.input.target.value }).then(res => {
-                console.log('La consulta llega: ', res.data)
-                set_users_data(res.data)
-                usersRef.current = users
-            }).catch(
+        if ((props.input !== aux_input) || (props.input === '' && users.length === 0) || userDeleted) {
+            axios.post('api/user/get_users', { input: props.input }).then(res => set_users_data(res.data)).catch(
                 err => console.log('Petición fallida', err)
             )
+            set_aux_input(props.input);
+            set_user_deleted(false)
         }
-        inputRef.current = props.input;
     },
         // Sobre esta lista, lista de dependencias, se indican las variables para las que se ejecutará el mismo método 'useEffect' cuando cambien de estado, por ejemplo, se elimina un usuario de la lista 'users', funcinoa como si se tratase de enlistarse en la variable como observador
-        [users, props.input])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        [users, props.input, userDeleted])
 
     const users_list = users.map(user => {
         return (
             // Es importante definir la pk del elemento cuando se lo define dentro de una lista de elementos. No se genera automáticamente una pk para cada elemento dentro de la lista de elementos
             <div key={user.id}>
-                <User data={user} />
+                <User data={user} userDeleted={set_user_deleted} />
             </div>
         )
     })
