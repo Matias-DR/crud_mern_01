@@ -34,22 +34,10 @@ router.post('/add_user', (req, res) => {
     })
 })
 
-router.get('/get_users', (req, res) => {
-    user_model.find({}, (err, users) => {
-        if (err) res.send('Error al cargar los usuarios, por favor reintente')
-        else {
-            res.send(users)
-        }
-    })
-})
-
-router.post('/custom_get_users', (req, res) => {
+router.post('/get_users', (req, res) => {
     user_model.find({ name: { $regex: req.body.input } }, (err, users) => {
         if (err) res.send('Error al cargar los usuarios, por favor reintente')
-        else {
-            console.log(users)
-            res.send(users)
-        }
+        else res.send(users)
     })
 })
 
