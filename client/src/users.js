@@ -1,8 +1,10 @@
 import axios from 'axios';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import User from './user'
 
-function Users() {
+function Users(props) {
+    const inputRef = useRef(null);
+    const usersRef = useRef(null);
     const [users, set_users_data] = useState([])
 
     useEffect(() => {
@@ -33,14 +35,19 @@ function Users() {
             error => console.log(error.message)
         );
         */
-        axios.get('api/user/get_users').then(res => {
-            set_users_data(res.data)
-        }).catch(
-            err => console.log('Petición fallida', err)
-        )
+        if ((props.input && inputRef.current !== props.input) | !users) {
+            axios.post('api/user/custom_get_users', { input: props.input.target.value }).then(res => {
+                console.log('La consulta llega: ', res.data)
+                set_users_data(res.data)
+                usersRef.current = users
+            }).catch(
+                err => console.log('Petición fallida', err)
+            )
+        }
+        inputRef.current = props.input;
     },
         // Sobre esta lista, lista de dependencias, se indican las variables para las que se ejecutará el mismo método 'useEffect' cuando cambien de estado, por ejemplo, se elimina un usuario de la lista 'users', funcinoa como si se tratase de enlistarse en la variable como observador
-        [users])
+        [users, props.input])
 
     const users_list = users.map(user => {
         return (
