@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import './App.css';
 import AddUser from './add_user'
 import UserEdit from './user_edit'
@@ -9,11 +9,6 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 function App() {
     const [user_search_input, set_user_search_input] = useState('')
-
-    useEffect(() => {
-        console.log(user_search_input.type ? true : false)
-        if (!user_search_input.type) set_user_search_input('')
-    }, [user_search_input])
 
     return (
         <div className="App">
@@ -30,7 +25,7 @@ function App() {
                             </li>
                         </ul>
                         <form className="d-flex" role="search">
-                            <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" onChange={input => set_user_search_input(input)}/>
+                            <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" onChange={input => set_user_search_input(input.target.value)}/>
                             <button className="btn btn-outline-success" type="submit">Search</button>
                         </form>
                     </div>
