@@ -11,7 +11,8 @@ const userSchema = new mongoose.Schema({
     name: String,
     email: String,
     phone: String,
-    prof_img: String
+    prof_img: String,
+    location: String
 })
 const user_model = mongoose.model('user', userSchema)
 module.exports = router

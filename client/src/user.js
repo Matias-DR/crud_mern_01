@@ -27,6 +27,7 @@ function User({ data, userDeleted }) {
                     <h5 className="card-title">{data.name}</h5>
                     <p className="card-text">{data.email}</p>
                     <p className="card-text">{data.phone}</p>
+                    <p className="card-text">{data.location}</p>
                 </div>
                 <div className="row align-items-center">
                     <div className="col">
