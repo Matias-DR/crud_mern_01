@@ -1,11 +1,9 @@
 import { useState } from 'react';
 import './App.css';
-import AddUser from './add_user'
-import UserEdit from './user_edit'
-import Users from './users'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-
-// Quedamos en que hay que realizar la primer consulta al cargar la página, y, realizar la consulta al eliminar un usuario
+import AddUser from './add_user';
+import UserEdit from './user_edit';
+import Users from './users';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
     const [user_search_input, set_user_search_input] = useState('')
