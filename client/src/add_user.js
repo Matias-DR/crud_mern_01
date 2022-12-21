@@ -4,6 +4,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import { useNavigate } from "react-router-dom";
 import Avatar from 'react-avatar-edit'
+import GMap from './g_map_comp';
 
 function AddUser() {
     const nav = useNavigate()
@@ -12,6 +13,7 @@ function AddUser() {
     const [email, setEmail] = useState('')
     const [phone, setPhone] = useState('')
     const [prof_img, set_prof_img] = useState(null)
+    const [location, setLocation] = useState('')
 
     function add_user() {
         var user = {
@@ -19,6 +21,7 @@ function AddUser() {
             email: email,
             phone: phone,
             prof_img: prof_img,
+            location: location,
             id: uniqid()
         }
         // res.then funciona como un try except, captura la excepción levantada
@@ -29,14 +32,6 @@ function AddUser() {
             }).then(err => {
                 console.log(err)
             })
-    }
-
-    function onCrop(image) {
-        set_prof_img(image)
-    }
-
-    function onClose() {
-        set_prof_img(null)
     }
 
     return (
@@ -62,10 +57,13 @@ function AddUser() {
                     <button onClick={add_user} className="mt-3 mb-3 btn btn-success">Guardar usuario</button>
                 </div>
                 <div className="col">
-                    <Avatar onCrop={onCrop} onClose={onClose} width={320} height={320} imageWidth={320}></Avatar>
+                    <Avatar onCrop={(image) => set_prof_img(image)} onClose={() => set_prof_img(null)} width={320} height={320} imageWidth={320}></Avatar>
                 </div>
                 <div className="col">
                     <img src={prof_img} alt="..."></img>
+                </div>
+                <div className="col">
+                    <GMap/>
                 </div>
             </div>
         </div>

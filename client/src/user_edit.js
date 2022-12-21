@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
 import Avatar from 'react-avatar-edit'
+import GMap from './g_map_comp';
 
 function UserEdit() {
     const params = useParams()
@@ -13,6 +14,7 @@ function UserEdit() {
     const [email, set_email] = useState([])
     const [phone, set_phone] = useState([])
     const [prof_img, set_prof_img] = useState('')
+    const [location, setLocation] = useState('')
 
     useEffect(() => {
         // En este caso, se indica como segundo parámetro el criterio por el que realizar la búsqueda del usuario.
@@ -35,6 +37,7 @@ function UserEdit() {
             email: email,
             phone: phone,
             prof_img: prof_img,
+            location: location,
             id: params.id
         }
         axios.post('/api/user/edit_user', user).then(
@@ -44,14 +47,6 @@ function UserEdit() {
             }).then(err => {
                 if (err) console.log(err)
             })
-    }
-
-    function onCrop(image) {
-        set_prof_img(image)
-    }
-
-    function onClose() {
-        set_prof_img(null)
     }
 
     return (
@@ -77,10 +72,13 @@ function UserEdit() {
                     <button onClick={edit_user} className="mt-3 mb-3 btn btn-success">Actualizar usuario</button>
                 </div>
                 <div className="col">
-                    <Avatar onCrop={onCrop} onClose={onClose} width={320} height={320} imageWidth={320}></Avatar>
+                    <Avatar onCrop={(image) => set_prof_img(image)} onClose={() => set_prof_img(null)} width={320} height={320} imageWidth={320}></Avatar>
                 </div>
                 <div className="col">
                     <img src={prof_img} alt="..."></img>
+                </div>
+                <div className="col">
+                    <GMap />
                 </div>
             </div>
         </div >
